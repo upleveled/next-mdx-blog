@@ -2,7 +2,11 @@ import Link from 'next/link';
 
 const postFileNames =
   preval`
-module.exports = require("fs").readdirSync("./pages/blog/")
+const fs = require("fs");
+const path = require("path");
+module.exports = fs.readdirSync("./pages/blog/").filter((file) =>
+  path.extname(file).toLowerCase() === '.md'
+);
 ` || [];
 
 const posts = postFileNames.map(name => {
