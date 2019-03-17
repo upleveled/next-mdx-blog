@@ -13,7 +13,7 @@ const posts = postFileNames.map(name => {
   const {
     default: Component,
     meta: { title }
-  } = require('../pages/blog/' + name);
+  } = require('./' + name);
 
   return {
     Component,
