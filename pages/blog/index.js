@@ -1,11 +1,12 @@
 import Link from 'next/link';
+import Layout from '../../layouts/default';
 
 const postFileNames =
   preval`
 const fs = require("fs");
 const path = require("path");
 module.exports = fs.readdirSync("./pages/blog/").filter((file) =>
-  path.extname(file).toLowerCase() === '.md'
+  path.extname(file).toLowerCase() === '.mdx'
 );
 ` || [];
 
@@ -18,12 +19,12 @@ const posts = postFileNames.map(name => {
   return {
     Component,
     title,
-    path: `/blog/${name.replace('.md', '')}`
+    path: `/blog/${name.replace('.mdx', '')}`
   };
 });
 
 export default () => (
-  <div>
+  <Layout>
     <h1>My Blog</h1>
     {posts.map(post => (
       <div key={`post-${post.title}`}>
@@ -34,5 +35,5 @@ export default () => (
         </Link>
       </div>
     ))}
-  </div>
+  </Layout>
 );
